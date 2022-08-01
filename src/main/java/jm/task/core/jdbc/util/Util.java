@@ -17,7 +17,8 @@ public class Util {
             "&useLegacyDatetimeCode=false&serverTimezone=UTC";
 
 
-    private static Connection connection;
+    private static Connection connection = null;
+
 
     static {
         try {
@@ -30,12 +31,11 @@ public class Util {
 
     public static Connection getConnection() {
 
-        Statement statement = null;
-        ResultSet resultSet = null;
-        try {
+
+         try {
             connection.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
             connection.setAutoCommit(false);
-            statement = connection.createStatement();
+            connection.createStatement();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
             throw new RuntimeException();
@@ -44,83 +44,4 @@ public class Util {
 
         return connection;
     }
-
-    public static void rollbackQuietly(Connection connection) {
-        if (connection != null) {
-            try {
-                connection.rollback();
-            } catch (SQLException e) {
-            }
-        }
-
-
-    }
-
-    public static void closeQuietly(Connection connection) {
-        if (connection != null) {
-            try {
-                connection.close();
-            } catch (SQLException e) {
-            }
-        }
-
-
-    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
