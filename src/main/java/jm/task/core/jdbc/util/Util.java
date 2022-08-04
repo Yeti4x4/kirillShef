@@ -17,25 +17,15 @@ public class Util {
             "&useLegacyDatetimeCode=false&serverTimezone=UTC";
 
 
-    private static Connection connection = null;
-
-
-    static {
-        try {
-            connection = DriverManager.getConnection(url, user, passvord);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-            throw new RuntimeException();
-        }
-    }
 
     public static Connection getConnection() {
 
-
+       Connection connection ;
          try {
-            connection.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
-            connection.setAutoCommit(false);
-            connection.createStatement();
+             connection = DriverManager.getConnection(url, user, passvord);
+             connection.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
+             connection.setAutoCommit(false);
+             connection.createStatement();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
             throw new RuntimeException();
